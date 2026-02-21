@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: presupuesto_mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: presupuesto
+      MYSQL_USER: cori
+      MYSQL_PASSWORD: "123"
+      MYSQL_ROOT_PASSWORD: "root" # Contraseña para el usuario root (backup)
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      # Descomenta la siguiente línea si creaste el archivo init_db.sql
+      - ./mysql-init:/docker-entrypoint-initdb.d
+
+volumes:
+  mysql_data:
